@@ -49,7 +49,7 @@ public class PDFData {
 		xstream.aliasField("cache-control", Head.class, "cacheControl");
 		xstream.aliasField("access-key", Head.class, "accessKey");
 		xstream.aliasField("unserviceable-url", Head.class, "unserviceableURL");
-		// FormField
+		// TextField
 		xstream.alias("field", TextField.class);
 		xstream.useAttributeFor("name", String.class);
 		xstream.useAttributeFor("value", String.class);
