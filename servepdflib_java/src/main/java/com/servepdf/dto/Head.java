@@ -36,8 +36,8 @@ public class Head {
 	public void validate() throws ValidationException {
 		ValidationException.throwUnlessURL(documentURL,"documentURL");
 		ValidationException.throwUnlessNonEmpty(accessKey,"accessKey");
-		ValidationException.throwUnlessNonEmpty(cacheControl,"cacheControl");
-		ValidationException.throwUnlessOneOf(cacheControl, "pdfdata.head.cacheControl", new String[]{CACHE_NO,CACHE_ASSETS,CACHE_SESSION});
+		if (cacheControl != null)
+		    ValidationException.throwUnlessOneOf(cacheControl, "pdfdata.head.cacheControl", new String[]{CACHE_NO,CACHE_ASSETS,CACHE_SESSION});
 		if (mail != null) mail.validate();
 	}
 }
