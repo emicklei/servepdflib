@@ -32,4 +32,13 @@ public class Body {
 			element.validate();
 		}
 	}
+	/**
+	 * Convencience methods to add a new TextField.
+	 * @param name
+	 * @param text
+	 */
+	public void addText(String name, String text) {
+		if (name == null || name.length() == 0) return;
+		this.getFields().add(new TextField(name,text));
+	}
 }
