@@ -20,10 +20,8 @@ package com.servepdf.dto
 	[Bindable]
 	public class PDFData
 	{
-		public var head:Head;
-		public var body:Body;	
-	
-		public var fields:Array = new Array();
+		public var head:Head = new Head();
+		public var body:Body = new Body();	
 		
 		public function setField(fieldName:String,fieldValue:String):void{
 			body.fields.push(new TextField(fieldName,fieldValue));
