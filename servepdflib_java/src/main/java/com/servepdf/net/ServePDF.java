@@ -14,11 +14,13 @@ public class ServePDF {
 	
 	public String base_url = "http://pws.servepdf.com";
 	
-	public void process(PDFData data, OutputStream out){
+	public void process(PDFData data, OutputStream out, String secretAccessKey){
 		HttpClient http = new HttpClient();
 		PostMethod post = new PostMethod(base_url + "/process");		
 		try {
 			post.setRequestEntity(new StringRequestEntity(data.toXML(),"text/xml" , "utf8"));
+			String authorization = this.computeSignature(data,secretAccessKey);
+			post.setRequestHeader("Authorization", authorization);
 			int code = http.executeMethod(post);
 			if (code != HttpStatus.SC_OK) 
 				throw new RuntimeException("post failed returning http code:" + code);
@@ -34,5 +36,10 @@ public class ServePDF {
 		} finally {
 			post.releaseConnection();
 		}		
+	}
+	
+	private String computeSignature(PDFData data,String secretAccessKey) {
+		// TOOD
+		return secretAccessKey;
 	}
 }
