@@ -32,11 +32,5 @@ package com.servepdf.dto
 			pdfdata.appendChild(body.toXML())
 			return pdfdata
 		}
-		/**
-		 * Post the data to ServePDF.com
-		 */
-		public function send():void {
-			new ServePDF().process(this)
-		}
 	}
 }

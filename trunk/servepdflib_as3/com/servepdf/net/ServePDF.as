@@ -15,10 +15,12 @@
 */
 package com.servepdf.net
 {
+	import com.servepdf.dto.PDFData;
+	
 	import flash.net.URLRequest;
+	import flash.net.URLRequestHeader;
 	import flash.net.URLRequestMethod;
 	import flash.net.navigateToURL;
-	import com.servepdf.dto.PDFData;
 	
 	public class ServePDF
 	{		
@@ -32,11 +34,13 @@ package com.servepdf.net
 		/**
 		 * Process the PDF form with this data. Open the result in a window.
 		 */
-		public function process(data:PDFData):void {
+		public function process(data:PDFData,secretAccessKey:String):void {
 			this.checkPreconditions(data)
 			// compose request and navigate to it
 			var request:URLRequest = new URLRequest(base_url+"/process")
        	    request.method = URLRequestMethod.POST
+       	    var authorization:URLRequestHeader = new URLRequestHeader("Authorization",this.computeSignature(data,secretAccessKey))
+       	    request.requestHeaders.push(authorization)
        	    request.contentType = "text/xml"   
        	    var documentURL:String = data.head.documentURL
        	    request.data = data.toXML().toXMLString()
@@ -55,6 +59,11 @@ package com.servepdf.net
 			// check data
 			if (data == null)
 				throw new ArgumentError("data is null and should be PDFData")
+		}
+		
+		private function computeSignature(data:PDFData, secretAccessKey:String):String {
+			// TODO
+			return secretAccessKey
 		}
 	}
 }
