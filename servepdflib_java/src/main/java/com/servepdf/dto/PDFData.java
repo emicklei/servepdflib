@@ -77,4 +77,8 @@ public class PDFData {
 		ValidationException.throwIfNull(body, "pdfdata.body");
 		body.validate();
 	}
+	/**
+	 * For debugging
+	 */
+	public String toString(){ return toXML(); }
 }
