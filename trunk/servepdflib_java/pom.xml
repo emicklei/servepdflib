@@ -6,7 +6,11 @@
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
   <name>servepdflib_java</name>
-  <url>http://maven.apache.org</url>
+  <url>http://www.servepdf.com</url>
+ 	  <scm>
+	    <connection>scm:svn:http://servepdflib.googlecode.com/svn/trunk/servepdflib_java</connection>
+	    <url>http://servepdflib.googlecode.com/svn/trunk/servepdflib_java</url>
+	  </scm> 
   <dependencies>
 
     <dependency>
