@@ -17,10 +17,26 @@ package com.servepdf.dto.table
 {
 	public class Row
 	{
-		public function Row()
+		public var cells:Array = [];
+		
+		public function Row(columns:int=0)
 			{
 			super();
+			for(var c:int=0;c<columns;c++)
+				cells.push(new Cell(""))		
 		}
-
+		public function addCell(contents:String):Cell {
+			var cell:Cell = new Cell(contents)
+			cells.push(cell)
+			return cell
+		}
+		public function toXML():XML {
+			var row:XML = <tr/>
+			for(var c:int=0;c<cells.length;c++) {
+				var eachCell:Cell = cells[c]
+				row.appendChild(eachCell.toXML())
+			}			
+			return row;
+		}
 	}
 }

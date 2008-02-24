@@ -24,6 +24,8 @@ package com.servepdf.dto.table
 			super();
 			this.contents = contents;
 		}
-
+		public function toXML():XML {
+			return <td>{contents}</td>
+		}
 	}
 }
