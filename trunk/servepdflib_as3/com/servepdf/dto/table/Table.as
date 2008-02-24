@@ -15,12 +15,55 @@
 */
 package com.servepdf.dto.table
 {
+	import com.servepdf.dto.PDFData;
+	import com.servepdf.dto.TextField;
+	
 	public class Table
 	{
-		public function Table()
+		public var rows:Array = [];
+		
+		public function Table(rows:int=0,columns:int=0)
 			{
 			super();
+			// initialize with rows and cells
+			for(var r:int=0;r<rows;r++) 
+				this.rows.push(new Row(columns));
 		}
-
+		/**
+		 * Return the first row with has a cell at a given column with a given contents
+		 */
+		public function findLastRowWithCell(column:int,contents:String):Row {
+			var found:Row = null
+			for(var r:int=0;r<rows.length;r++) {
+				var eachRow:Row = rows[r]
+				var first:Cell = eachRow.cells[column]
+				if (contents == first.contents) {
+					found = eachRow
+				}
+			}
+			return found
+		}
+		public function addAsTextFieldsTo(fieldNamePrefixes:Array,data:PDFData):void {
+			for(var r:int=0;r<rows.length;r++) {
+				var eachRow:Row = rows[r]
+				for(var c:int=0;c<eachRow.cells.length;c++) {
+					var eachCell:Cell = eachRow.cells[c]
+					var name:String = fieldNamePrefixes[c]
+					name = name + "["
+					name = name + String(r)
+					name = name + "]"
+					var field:TextField = new TextField(name,eachCell.contents)
+					data.body.fields.push(field)
+				}
+			}			
+		}
+		public function toXML():XML {
+			var table:XML = <table/>
+			for(var r:int=0;r<rows.length;r++) {
+				var eachRow:Row = rows[r]
+				table.appendChild(eachRow.toXML())
+			}			
+			return table;
+		}
 	}
 }
