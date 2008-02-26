@@ -1,5 +1,9 @@
 package com.servepdf.dto.table;
-
+/**
+ * Builder can help in constructing a Table instance.
+ * 
+ * @author ernestmicklei
+ */
 public class Builder {
 	public Table table = new Table();
 	public Row currentRow;
