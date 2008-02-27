@@ -1,6 +1,6 @@
 package com.servepdf.dto.table;
 /**
- * Builder can help in constructing a Table instance.
+ * Builder can help in constructing a Table instance but providing a fluent interface.
  * 
  * @author ernestmicklei
  */
