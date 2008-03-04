@@ -12,11 +12,22 @@ public class Builder {
 	 * Add a new header cell to the current row.
 	 * @param data
 	 */
-	
 	public void th(String data) {
 		if (null == currentRow) throw new RuntimeException("no row available ; use tr()");
 		currentRow.cells.add(new HeaderCell(data));
 	}
+	
+	/**
+	 * Add a new header cell to the current row.
+	 * @param data
+	 * @param font
+	 * @param fontSize
+	 */
+	public void th(String data, String font, String fontSize) {
+        if (null == currentRow) throw new RuntimeException("no row available ; use tr()");
+        currentRow.cells.add(new HeaderCell(data,font,fontSize));
+	}
+	
 	/**
 	 * Add a new data cell to the current row.
 	 * @param data
@@ -27,13 +38,23 @@ public class Builder {
 	}
 
 	/**
+	 * Add a new data cell to the current row.
+	 * @param data
+	 * @param font
+	 * @param fontSize
+	 */
+	public void td(String data, String font, String fontSize) {
+        if (null == currentRow) throw new RuntimeException("no row available ; use tr()");
+        currentRow.cells.add(new Cell(data,font,fontSize));
+	}
+	
+	/**
 	 * Create a new row. If a row was currently build then add that row to the
 	 * table.
 	 */
-	public void tr() {
-		if (null != currentRow) {
-			table.rows.add(currentRow);
-		}
+	public void tr(String height) {
 		currentRow = new Row();
+        currentRow.height = height;
+        table.rows.add(currentRow);
 	}
 }

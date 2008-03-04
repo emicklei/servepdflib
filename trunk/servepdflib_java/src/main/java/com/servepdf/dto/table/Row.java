@@ -5,4 +5,5 @@ import java.util.List;
 
 public class Row {
 	public List cells = new ArrayList();
+	public String height;
 }
