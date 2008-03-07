@@ -12,11 +12,12 @@
    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
    See the License for the specific language governing permissions and
    limitations under the License. 
-*/
+ */
 package com.servepdf.dto;
 
 import java.io.InputStream;
 
+import com.servepdf.dto.table.Table;
 import com.thoughtworks.xstream.XStream;
 
 /**
@@ -25,60 +26,57 @@ import com.thoughtworks.xstream.XStream;
  * @author ernest
  */
 public class PDFData {
+	public static final XStream XMLIO = PDFData.newXStream();	
 	public Head head = new Head();
 	public Body body = new Body();
+	
 
 	/**
-	 * Create a new PDFData from the XML representation of PDFData.
-	 * This method is also required for the Pocogese framework.
+	 * Create a new PDFData from the XML representation of PDFData. This method
+	 * is also required for the Pocogese framework.
+	 * 
 	 * @return PDFData
 	 */
 	public static PDFData fromXML(String xml) {
-		return (PDFData) (PDFData.newXStream().fromXML(xml));
+		return (PDFData) (XMLIO.fromXML(xml));
 	}
 
 	public static PDFData fromXMLStream(InputStream is) {
-		return (PDFData) (PDFData.newXStream().fromXML(is));
+		return (PDFData) (XMLIO.fromXML(is));
 	}
+
 	private static XStream newXStream() {
 		XStream xstream = new XStream();
-		xstream.alias("pdfdata", PDFData.class);		
-		xstream.addImplicitCollection(Body.class, "fields");
-		// Head
-		xstream.aliasField("document-url", Head.class, "documentURL");
-		xstream.aliasField("cache-control", Head.class, "cacheControl");
-		xstream.aliasField("access-key", Head.class, "accessKey");
-		xstream.aliasField("unserviceable-url", Head.class, "unserviceableURL");
-		// TextField
-		xstream.alias("field", TextField.class);
-		xstream.useAttributeFor("name", String.class);
-		xstream.useAttributeFor("value", String.class);
-		xstream.useAttributeFor("version", String.class);
-		// Mail
-		xstream.alias("mail", Mail.class);
-		xstream.useAttributeFor("toAddress", String.class);
-		xstream.useAttributeFor("fromAddress", String.class);
-		xstream.useAttributeFor("subject", String.class);
-		xstream.useAttributeFor("contentType", String.class);
+		xstream.alias("pdfdata", PDFData.class);
+		Body.setup(xstream);
+		Head.setup(xstream);
+		TextField.setup(xstream);
+		Table.setup(xstream);
+		Mail.setup(xstream);
 		return xstream;
 	}
+
 	/**
-	 * Return the XML representation of PDFData.
-	 * This method is also required for the Pocogese framework.
+	 * Return the XML representation of PDFData. This method is also required
+	 * for the Pocogese framework.
+	 * 
 	 * @return xml encoded PDFData
 	 */
 	public String toXML() {
-		return PDFData.newXStream().toXML(this);
+		return XMLIO.toXML(this);
 	}
-	
+
 	public void validate() throws ValidationException {
 		ValidationException.throwIfNull(head, "pdfdata.head");
 		head.validate();
 		ValidationException.throwIfNull(body, "pdfdata.body");
 		body.validate();
 	}
+
 	/**
 	 * For debugging
 	 */
-	public String toString(){ return toXML(); }
+	public String toString() {
+		return toXML();
+	}
 }

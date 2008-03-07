@@ -4,6 +4,9 @@ public class Cell {
 	public String contents;
 	public String font;
     public String fontSize;
+	// captures multiple attributes, if set then the non-null values 
+	// override those from the containing Row or containing Table.
+    public CellAppearance appearance = null;    
 	
 	public Cell(String contents){
 		this.contents = contents;

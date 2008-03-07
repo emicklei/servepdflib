@@ -15,6 +15,8 @@
 */
 package com.servepdf.dto;
 
+import com.thoughtworks.xstream.XStream;
+
 public class Mail {
 	
 	public String toAddress;
@@ -29,5 +31,12 @@ public class Mail {
 		ValidationException.throwUnlessNonEmpty(subject,"subject");
 		ValidationException.throwUnlessNonEmpty(content,"content");
 		ValidationException.throwUnlessNonEmpty(contentType,"contentType");
+	}
+	public static void setup(XStream xstream) {	
+		xstream.alias("mail", Mail.class);
+		xstream.useAttributeFor("toAddress", String.class);
+		xstream.useAttributeFor("fromAddress", String.class);
+		xstream.useAttributeFor("subject", String.class);
+		xstream.useAttributeFor("contentType", String.class);	
 	}
 }
