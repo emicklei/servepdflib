@@ -9,6 +9,8 @@ public class Table {
 	public List rows = new ArrayList();
 	public String columnWidths;
     public String field;
+    public String x;
+    public String y;
 	
 	/**
 	 * Create a new Table from the XML representation of Table.
@@ -31,13 +33,18 @@ public class Table {
         xstream.alias("table", Table.class);
         xstream.useAttributeFor("columnWidths", String.class);
         xstream.useAttributeFor("field", String.class);
+        xstream.useAttributeFor("x", String.class);
+        xstream.useAttributeFor("y", String.class);
         xstream.registerConverter(new CellXMLConvertor());
         xstream.alias("tr", Row.class);
         xstream.alias("th", HeaderCell.class);
         xstream.alias("td", Cell.class);
         xstream.addImplicitCollection(Table.class, "rows");
         xstream.addImplicitCollection(Row.class, "cells");
-//        xstream.useAttributeFor("height", String.class);
+        
+        // tr
+        xstream.useAttributeFor("height", String.class);
+        
 //        xstream.useAttributeFor("font", String.class);
 //        xstream.useAttributeFor("fontSize", String.class);
             
