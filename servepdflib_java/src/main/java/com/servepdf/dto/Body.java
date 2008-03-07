@@ -16,20 +16,31 @@
 package com.servepdf.dto;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
+import com.servepdf.dto.table.Table;
+import com.thoughtworks.xstream.XStream;
+
 public class Body {
-	private List fields;
+	private List<TextField> fields;
+	private List<Table> tables;
 	
-	public List getFields(){
-		if (fields == null) fields = new ArrayList();
+	public List<TextField> getFields(){
+		if (fields == null) fields = new ArrayList<TextField>();
 		return fields;
 	}
+	public List<Table> getTables(){
+		if (tables == null) tables = new ArrayList<Table>();
+		return tables;
+	}	
 	public void validate() throws ValidationException {
-		for (Iterator iter = this.getFields().iterator(); iter.hasNext();) {
-			TextField element = (TextField) iter.next();
-			element.validate();
+		if (fields == null) return;
+		for (TextField field: this.getFields()) {
+			field.validate();
+		}
+		if (tables == null) return;
+		for (Table table: this.getTables()) {
+			table.validate();
 		}
 	}
 	/**
@@ -40,5 +51,10 @@ public class Body {
 	public void addText(String name, String text) {
 		if (name == null || name.length() == 0) return;
 		this.getFields().add(new TextField(name,text));
+	}
+	
+	public static void setup(XStream xstream) {
+		xstream.addImplicitCollection(Body.class, "fields");
+		xstream.addImplicitCollection(Body.class, "tables");		
 	}
 }

@@ -15,6 +15,8 @@
 */
 package com.servepdf.dto;
 
+import com.thoughtworks.xstream.XStream;
+
 
 public class Head {
 	public String documentURL;
@@ -39,5 +41,12 @@ public class Head {
 		if (cacheControl != null)
 		    ValidationException.throwUnlessOneOf(cacheControl, "pdfdata.head.cacheControl", new String[]{CACHE_NO,CACHE_ASSETS,CACHE_SESSION});
 		if (mail != null) mail.validate();
+	}
+	
+	public static void setup(XStream xstream) {
+		xstream.aliasField("document-url", Head.class, "documentURL");
+		xstream.aliasField("cache-control", Head.class, "cacheControl");
+		xstream.aliasField("access-key", Head.class, "accessKey");
+		xstream.aliasField("unserviceable-url", Head.class, "unserviceableURL");		
 	}
 }

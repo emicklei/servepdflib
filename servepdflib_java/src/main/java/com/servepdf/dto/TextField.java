@@ -15,6 +15,8 @@
 */
 package com.servepdf.dto;
 
+import com.thoughtworks.xstream.XStream;
+
 public class TextField {
 	public String name;
 	public String value;
@@ -27,5 +29,11 @@ public class TextField {
 	public void validate() throws ValidationException {
 		ValidationException.throwUnlessNonEmpty(name, "pdfdata.body.field[?].name");
 		ValidationException.throwIfNull(value, "pdfdata.body.field[?].value");
+	}
+	public static void setup(XStream xstream) {
+		xstream.alias("field", TextField.class);
+		xstream.useAttributeFor("name", String.class);
+		xstream.useAttributeFor("value", String.class);
+		xstream.useAttributeFor("version", String.class);
 	}
 }
