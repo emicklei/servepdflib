@@ -21,10 +21,18 @@ public class CellXMLConvertor implements Converter {
     }
 
 public Object unmarshal(HierarchicalStreamReader reader,
-            UnmarshallingContext context) {           
-    	reader.moveDown();
-    	Cell c = new Cell(reader.getValue(),reader.getAttribute("font"),reader.getAttribute("fontSize"));
-    	reader.moveUp();
+            UnmarshallingContext context) {         
+		Cell c = null;
+		String font=reader.getAttribute("font");
+		String fontSize=reader.getAttribute("fontSize");
+    	if (reader.getNodeName().equals("th"))
+    	{    		
+    		c = new HeaderCell(reader.getValue(),font,fontSize);    		
+    	}
+    	else
+    	{	
+    		c = new Cell(reader.getValue(),font,fontSize);    	
+    	}
     	return c;
 	}
 }
