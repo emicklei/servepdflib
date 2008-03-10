@@ -54,7 +54,8 @@ public class Body {
 	}
 	
 	public static void setup(XStream xstream) {
-		xstream.addImplicitCollection(Body.class, "fields");
-		xstream.addImplicitCollection(Body.class, "tables");		
+		// cannot have two sets of collections
+		//xstream.addImplicitCollection(Body.class, "fields");
+		//xstream.addImplicitCollection(Body.class, "tables");		
 	}
 }
