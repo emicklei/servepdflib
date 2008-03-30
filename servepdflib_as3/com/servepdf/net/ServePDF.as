@@ -39,8 +39,10 @@ package com.servepdf.net
 			// compose request and navigate to it
 			var request:URLRequest = new URLRequest(base_url+"/process")
        	    request.method = URLRequestMethod.POST
-       	    var authorization:URLRequestHeader = new URLRequestHeader("Authorization",this.computeSignature(data,secretAccessKey))
-       	    request.requestHeaders.push(authorization)
+       	    data.head.authorization = this.computeSignature(data,secretAccessKey)
+       	    // As of Flash 9.0?? the authorization http header is blocked :-(
+       	    //var authorization:URLRequestHeader = new URLRequestHeader("Authorization",..)
+       	    //request.requestHeaders.push(authorization)
        	    request.contentType = "text/xml"   
        	    var documentURL:String = data.head.documentURL
        	    request.data = data.toXML().toXMLString()
