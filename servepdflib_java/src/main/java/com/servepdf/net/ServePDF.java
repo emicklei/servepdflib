@@ -18,9 +18,11 @@ public class ServePDF {
 	public void process(PDFData data, OutputStream out, String secretAccessKey){
 		PostMethod post = new PostMethod(base_url + "/process");		
 		try {
-			post.setRequestEntity(new StringRequestEntity(data.toXML(),"text/xml" , "utf8"));
 			String authorization = this.computeSignature(data,secretAccessKey);
-			post.setRequestHeader("Authorization", authorization);
+			data.head.authorization = authorization;
+			post.setRequestEntity(new StringRequestEntity(data.toXML(),"text/xml" , "utf8"));			
+			// flex clients no longer can send the Authorization Http Header
+			// post.setRequestHeader("Authorization", authorization);
 			int code = this.http.executeMethod(post);
 			if (code != HttpStatus.SC_OK) 
 				throw new RuntimeException("post failed returning http code:" + code);
