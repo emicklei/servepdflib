@@ -17,6 +17,7 @@ package com.servepdf.dto
 {
 	public class Head
 	{
+		public var authorization:String;		
 		public var documentURL:String;
 		public var accessKey:String;
 		public var applicationKey:String;
@@ -30,6 +31,7 @@ package com.servepdf.dto
 		
 		public function toXML():XML {
 			var head:XML = <head>
+					<authorization>{authorization}</authorization>
 					<document-url>{documentURL}</document-url>
 					<accessKey>{accessKey}</accessKey>
 					<applicationKey>{applicationKey}</applicationKey>
