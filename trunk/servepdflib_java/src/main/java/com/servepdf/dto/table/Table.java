@@ -14,8 +14,8 @@ public class Table {
 	public String y;
 	// captures multiple attributes, if set then the values applies
 	// to all cells unless a Row or an Cell overrides it.
-	public CellAppearance appearance = null;
-
+	public CellAppearance appearance = new CellAppearance();
+	
 	/**
 	 * Create a new Table from the XML representation of Table.
 	 * 
@@ -43,19 +43,21 @@ public class Table {
 		xstream.useAttributeFor("x", String.class);
 		xstream.useAttributeFor("y", String.class);
 		xstream.registerConverter(new CellXMLConvertor());
-		xstream.alias("tr", Row.class);
-		xstream.alias("th", HeaderCell.class);
-		xstream.alias("td", Cell.class);
 		xstream.addImplicitCollection(Table.class, "rows");
 		xstream.addImplicitCollection(Row.class, "cells");
-		// tr
-		xstream.useAttributeFor("height", String.class);
-		// xstream.useAttributeFor("font", String.class);
-		// xstream.useAttributeFor("fontSize", String.class);		
+		xstream.omitField(Table.class, "appearance");
+		
+		Row.setup(xstream);
+		Cell.setup(xstream);
+		HeaderCell.setup(xstream);	
 	}
 	private static XStream newXStream() {
 		XStream xstream = new XStream();
 		Table.setup(xstream);
 		return xstream;
 	}
+	
+	public CellAppearance getAppearance(){
+		return appearance;
+	}	
 }
