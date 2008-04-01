@@ -1,3 +1,18 @@
+/*
+       Copyright 2008 Ernest Micklei, PhilemonWorks.com
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License. 
+*/
 package com.servepdf.net;
 
 import java.io.InputStream;
@@ -19,10 +34,10 @@ public class ServePDF {
 		PostMethod post = new PostMethod(base_url + "/process");		
 		try {
 			String authentication = this.computeSignature(data,secretAccessKey);
-			data.head.authentication = authentication;
 			post.setRequestEntity(new StringRequestEntity(data.toXML(),"text/xml" , "utf8"));			
 			// flex clients no longer can send the Authorization Http Header
-			// post.setRequestHeader("Authorization", authorization);
+			// so a custom header need to be used.
+			post.setRequestHeader("pws-authentication", authentication);
 			int code = this.http.executeMethod(post);
 			if (code != HttpStatus.SC_OK) 
 				throw new RuntimeException("post failed returning http code:" + code);

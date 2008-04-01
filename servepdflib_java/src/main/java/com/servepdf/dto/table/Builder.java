@@ -12,9 +12,11 @@ public class Builder {
 	 * Add a new header cell to the current row.
 	 * @param data
 	 */
-	public void th(String data) {
+	public HeaderCell th(String data) {
 		if (null == currentRow) throw new RuntimeException("no row available ; use tr()");
-		currentRow.cells.add(new HeaderCell(data));
+		HeaderCell headerCell = new HeaderCell(data);
+		currentRow.cells.add(headerCell);
+		return headerCell;
 	}
 	
 	/**
@@ -22,19 +24,25 @@ public class Builder {
 	 * @param data
 	 * @param font
 	 * @param fontSize
+	 * @return HeaderCell
 	 */
-	public void th(String data, String font, String fontSize) {
+	public HeaderCell th(String data, String font, String fontSize) {
         if (null == currentRow) throw new RuntimeException("no row available ; use tr()");
-        currentRow.cells.add(new HeaderCell(data,font,fontSize));
+        HeaderCell headerCell = new HeaderCell(data,font,fontSize);
+		currentRow.cells.add(headerCell);
+		return headerCell;
 	}
 	
 	/**
 	 * Add a new data cell to the current row.
 	 * @param data
+	 * @return Cell
 	 */
-	public void td(String data) {
+	public Cell td(String data) {
 		if (null == currentRow) throw new RuntimeException("no row available ; use tr()");
-		currentRow.cells.add(new Cell(data));
+		Cell cell = new Cell(data);
+		currentRow.cells.add(cell);
+		return cell;
 	}
 
 	/**
@@ -43,18 +51,22 @@ public class Builder {
 	 * @param font
 	 * @param fontSize
 	 */
-	public void td(String data, String font, String fontSize) {
+	public Cell td(String data, String font, String fontSize) {
         if (null == currentRow) throw new RuntimeException("no row available ; use tr()");
-        currentRow.cells.add(new Cell(data,font,fontSize));
+        Cell cell = new Cell(data,font,fontSize);
+		currentRow.cells.add(cell);
+		return cell;
 	}
 	
 	/**
 	 * Create a new row. If a row was currently build then add that row to the
 	 * table.
+	 * @return Row
 	 */
-	public void tr(String height) {
+	public Row tr(String height) {
 		currentRow = new Row();
         currentRow.height = height;
         table.rows.add(currentRow);
+        return currentRow;
 	}
 }

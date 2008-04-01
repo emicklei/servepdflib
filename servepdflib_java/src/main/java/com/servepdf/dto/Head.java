@@ -19,7 +19,6 @@ import com.thoughtworks.xstream.XStream;
 
 
 public class Head {
-	public String authentication;
 	public String documentURL;
 	public String accessKey;
 	public String applicationKey;
@@ -37,7 +36,6 @@ public class Head {
 	}
 	
 	public void validate() throws ValidationException {
-		ValidationException.throwUnlessNonEmpty(authentication,"authentication");
 		ValidationException.throwUnlessURL(documentURL,"documentURL");
 		ValidationException.throwUnlessNonEmpty(accessKey,"accessKey");
 		if (cacheControl != null)
@@ -46,7 +44,6 @@ public class Head {
 	}
 	
 	public static void setup(XStream xstream) {
-		xstream.aliasField("authentication", Head.class, "authentication");
 		xstream.aliasField("document-url", Head.class, "documentURL");
 		xstream.aliasField("cache-control", Head.class, "cacheControl");
 		xstream.aliasField("access-key", Head.class, "accessKey");

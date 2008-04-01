@@ -13,4 +13,12 @@ public class BuilderTest extends TestCase {
 		b.tr("10");
 		System.out.println(b.table);
 	}
+	public void testTableWithAppearance(){
+		Builder b = new Builder();
+		b.table.appearance.font = "Verdanda";
+		b.table.appearance.fontSize = "14";		
+		b.tr("10");
+		b.th("Title");
+		System.out.println(b.table);
+	}	
 }
