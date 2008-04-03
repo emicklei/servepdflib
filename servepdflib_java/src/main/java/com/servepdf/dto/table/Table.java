@@ -1,3 +1,18 @@
+/*
+       Copyright 2008 PhilemonWorks.com
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License. 
+*/
 package com.servepdf.dto.table;
 
 import java.util.ArrayList;
@@ -6,15 +21,12 @@ import java.util.List;
 import com.servepdf.dto.ValidationException;
 import com.thoughtworks.xstream.XStream;
 
-public class Table {
+public class Table extends AppearanceHolder {
 	public List<Row> rows = new ArrayList<Row>();
 	public String columnWidths;
 	public String field;
 	public String x;
 	public String y;
-	// captures multiple attributes, if set then the values applies
-	// to all cells unless a Row or an Cell overrides it.
-	public CellAppearance appearance = new CellAppearance();
 	
 	/**
 	 * Create a new Table from the XML representation of Table.
@@ -45,7 +57,7 @@ public class Table {
 		xstream.registerConverter(new CellXMLConvertor());
 		xstream.addImplicitCollection(Table.class, "rows");
 		xstream.addImplicitCollection(Row.class, "cells");
-		xstream.omitField(Table.class, "appearance");
+		xstream.omitField(AppearanceHolder.class, "appearance");
 		
 		Row.setup(xstream);
 		Cell.setup(xstream);
@@ -56,8 +68,4 @@ public class Table {
 		Table.setup(xstream);
 		return xstream;
 	}
-	
-	public CellAppearance getAppearance(){
-		return appearance;
-	}	
 }

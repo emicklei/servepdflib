@@ -15,10 +15,10 @@ public class BuilderTest extends TestCase {
 	}
 	public void testTableWithAppearance(){
 		Builder b = new Builder();
-		b.table.appearance.font = "Verdanda";
-		b.table.appearance.fontSize = "14";		
-		b.tr("10");
-		b.th("Title");
+		b.table.setFont("Verdanda");
+		b.table.setFontSize("14");		
+		b.tr("10").setFont("Helvetica");
+		b.th("Title").setFontSize("18");
 		System.out.println(b.table);
 	}	
 }
