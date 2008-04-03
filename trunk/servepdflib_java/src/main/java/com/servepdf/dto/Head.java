@@ -1,5 +1,5 @@
 /*
-       Copyright 2007 Ernest Micklei, PhilemonWorks.com
+       Copyright 2008 PhilemonWorks.com
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -26,9 +26,9 @@ public class Head {
 	public String unserviceableURL;
 	private Mail mail = null; // optional	
 	
-	public static String CACHE_NO = "no-cache";
-	public static String CACHE_ASSETS= "cache-assets"; // template,images,...
-	public static String CACHE_SESSION = "cache-for-session";
+	public static final String CACHE_NO = "no-cache";
+	public static final String CACHE_ASSETS= "cache-assets"; // template,images,...
+	public static final String CACHE_SESSION = "cache-for-session";
 		
 	public Mail getMail(){
 		if (mail == null) mail = new Mail();

@@ -13,10 +13,10 @@ public class CellXMLConvertor implements Converter {
 
 	public void marshal(Object value, HierarchicalStreamWriter writer, MarshallingContext context) {
 		Cell c = (Cell) value;
-		if (c.getAppearance().font != null) {
+		if (c.hasAppearance() && c.getAppearance().font != null) {
 			writer.addAttribute("font", c.getAppearance().font);
 		} 
-		if (c.getAppearance().fontSize != null) {
+		if (c.hasAppearance() && c.getAppearance().fontSize != null) {
 			writer.addAttribute("fontSize", c.getAppearance().fontSize);
 		}
 		writer.setValue(c.contents);
