@@ -19,7 +19,6 @@ import com.thoughtworks.xstream.XStream;
 
 
 public class Head {
-	public String documentURL;
 	public String accessKey;
 	public String applicationKey;
 	public String cacheControl = "no-cache";
@@ -36,7 +35,6 @@ public class Head {
 	}
 	
 	public void validate() throws ValidationException {
-		ValidationException.throwUnlessURL(documentURL,"documentURL");
 		ValidationException.throwUnlessNonEmpty(accessKey,"accessKey");
 		if (cacheControl != null)
 		    ValidationException.throwUnlessOneOf(cacheControl, "pdfdata.head.cacheControl", new String[]{CACHE_NO,CACHE_ASSETS,CACHE_SESSION});
@@ -44,7 +42,6 @@ public class Head {
 	}
 	
 	public static void setup(XStream xstream) {
-		xstream.aliasField("document-url", Head.class, "documentURL");
 		xstream.aliasField("cache-control", Head.class, "cacheControl");
 		xstream.aliasField("access-key", Head.class, "accessKey");
 		xstream.aliasField("unserviceable-url", Head.class, "unserviceableURL");		
