@@ -18,44 +18,44 @@ package com.servepdf.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.servepdf.dto.table.Table;
 import com.thoughtworks.xstream.XStream;
 
 public class Body {
-	private List<TextField> fields;
-	private List<Table> tables;
-	
-	public List<TextField> getFields(){
-		if (fields == null) fields = new ArrayList<TextField>();
-		return fields;
-	}
-	public List<Table> getTables(){
-		if (tables == null) tables = new ArrayList<Table>();
-		return tables;
-	}	
-	public void validate() throws ValidationException {
-		if (fields == null) return;
-		for (TextField field: this.getFields()) {
-			field.validate();
-		}
-		if (tables == null) return;
-		for (Table table: this.getTables()) {
-			table.validate();
-		}
-	}
-	/**
-	 * Convencience methods to add a new TextField.
-	 * @param name
-	 * @param text
-	 */
-	public void addText(String name, String text) {
-		if (name == null || name.length() == 0) return;
-		this.getFields().add(new TextField(name,text));
+	public List<Content> contentList = new ArrayList<Content>();
+
+	public Body(){
+	    this.contentList.add(new Content());
 	}
 	
-	public static void setup(XStream xstream) {
-		// cannot have two sets of collections
-		//xstream.addImplicitCollection(Body.class, "fields");
-		//xstream.addImplicitCollection(Body.class, "tables");		
-	}
+    public List<Content> getContentList() {
+        return contentList;
+    }
+
+    public void setContentList(List<Content> contentList) {
+        this.contentList = contentList;
+    }
+    
+    public void validate() throws ValidationException {
+        for (Content each : contentList) {
+            each.validate();
+        }
+    }
+    /**
+     * Single content API
+     * @param name
+     * @param text
+     */
+    public void addText(String name, String text) {
+        contentList.get(0).addText(name, text);        
+    }
+    /**
+     * Single content API
+     */
+    public List<TextField> getFields() {
+        return contentList.get(0).getFields();
+    }
+
+    public static void setup(XStream xstream) {
+    	xstream.addImplicitCollection(Body.class, "contentList");	
+    }
 }

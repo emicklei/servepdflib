@@ -48,6 +48,7 @@ public class PDFData {
 	private static XStream newXStream() {
 		XStream xstream = new XStream();
 		xstream.alias("pdfdata", PDFData.class);
+		Content.setup(xstream);
 		Body.setup(xstream);
 		Head.setup(xstream);
 		TextField.setup(xstream);

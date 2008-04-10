@@ -23,15 +23,20 @@ public class PDFDataTest extends TestCase {
 	
 	public void testDataWithBodyWithFieldsWithSerialization(){
 		data.body.addText("test", "value");
-		
+		data.body.contentList.get(0).template = "http://here.there.com";
+		Table table = new Table();
+		table.columnWidths = "100,10";
+		table.setFontSize("12");
+        data.body.contentList.get(0).getTables().add(table);
 		data = toXmlAndBack(data);
-		
+
 		TextField tf = (TextField)(data.body.getFields().get(0));
 		assertNotNull(tf);
 		assertEquals("test",tf.name);
 		assertEquals("value",tf.value);
 	}	
 	private PDFData toXmlAndBack(PDFData input){
+	    System.out.println(input.toXML());
 		return PDFData.fromXML(input.toXML());
 	}
 }
