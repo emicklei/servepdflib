@@ -22,6 +22,10 @@ public class PDFDataTest extends TestCase {
 	}
 	
 	public void testDataWithBodyWithFieldsWithSerialization(){
+	    data.head.accessKey = "accessKey";
+	    data.head.applicationKey = "applicationKey";
+	    data.head.documentName = "outputFileName";
+	    data.head.unserviceableURL = "unserviceableURL";
 		data.body.addText("test", "value");
 		data.body.contentList.get(0).template = "http://here.there.com";
 		Table table = new Table();

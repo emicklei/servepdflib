@@ -19,6 +19,7 @@ import com.thoughtworks.xstream.XStream;
 
 
 public class Head {
+    public String documentName;
 	public String accessKey;
 	public String applicationKey;
 	public String cacheControl = "no-cache";
@@ -42,8 +43,10 @@ public class Head {
 	}
 	
 	public static void setup(XStream xstream) {
-		xstream.aliasField("cache-control", Head.class, "cacheControl");
-		xstream.aliasField("access-key", Head.class, "accessKey");
-		xstream.aliasField("unserviceable-url", Head.class, "unserviceableURL");		
+	    xstream.aliasField("document-name", Head.class, "documentName");	       
+	    xstream.aliasField("access-key", Head.class, "accessKey");
+        xstream.aliasField("application-key", Head.class, "applicationKey");
+        xstream.aliasField("cache-control", Head.class, "cacheControl");
+        xstream.aliasField("unserviceable-url", Head.class, "unserviceableURL");		
 	}
 }
