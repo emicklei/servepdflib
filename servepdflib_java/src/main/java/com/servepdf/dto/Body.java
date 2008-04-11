@@ -44,18 +44,24 @@ public class Body {
      * Single content API
      * @param name
      * @param text
+     * @deprecated
      */
     public void addText(String name, String text) {
-        contentList.get(0).addText(name, text);        
+        getContent().addText(name, text);        
     }
     /**
      * Single content API
+     * @deprecated
      */
     public List<TextField> getFields() {
-        return contentList.get(0).getFields();
+        return getContent().getFields();
     }
 
     public static void setup(XStream xstream) {
     	xstream.addImplicitCollection(Body.class, "contentList");	
     }
+    public Content getContent(){
+        return contentList.get(0);
+    }
+    
 }
