@@ -40,23 +40,6 @@ public class Body {
             each.validate();
         }
     }
-    /**
-     * Single content API
-     * @param name
-     * @param text
-     * @deprecated
-     */
-    public void addText(String name, String text) {
-        getContent().addText(name, text);        
-    }
-    /**
-     * Single content API
-     * @deprecated
-     */
-    public List<TextField> getFields() {
-        return getContent().getFields();
-    }
-
     public static void setup(XStream xstream) {
     	xstream.addImplicitCollection(Body.class, "contentList");	
     }
