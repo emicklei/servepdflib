@@ -57,6 +57,15 @@ public class PDFData {
 		return xstream;
 	}
 
+	public String getFormURLS(){
+		final StringBuilder sb = new StringBuilder();
+		for (Content each : body.getContentList()) {
+			sb.append(each.formURL);
+			sb.append(';');
+		}
+		return sb.toString();
+	}
+	
 	/**
 	 * Return the XML representation of PDFData. This method is also required
 	 * for the Pocogese framework.
