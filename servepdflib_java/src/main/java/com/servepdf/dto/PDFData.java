@@ -74,6 +74,13 @@ public class PDFData {
 		body.validate();
 	}
 
+	/** 
+	 * Convenience method to add new TextField to the first content of the body.
+	 */
+    public void addText(String name, String text) {
+        body.getContent().addText(name, text);        
+    }	
+	
 	/**
 	 * For debugging
 	 */
