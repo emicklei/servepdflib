@@ -27,7 +27,7 @@ public class PDFDataTest extends TestCase {
 	    data.head.documentName = "outputFileName";
 	    data.head.unserviceableURL = "unserviceableURL";
 		data.body.addText("test", "value");
-		data.body.contentList.get(0).template = "http://here.there.com";
+		data.body.contentList.get(0).formURL = "http://here.there.com";
 		Table table = new Table();
 		table.columnWidths = "100,10";
 		table.setFontSize("12");

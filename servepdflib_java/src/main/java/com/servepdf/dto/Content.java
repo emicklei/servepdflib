@@ -28,7 +28,7 @@ import com.thoughtworks.xstream.XStream;
  *
  */
 public class Content {
-    public String template;
+    public String formURL;
     private List<TextField> fields;
     private List<Table> tables;
     
@@ -41,7 +41,7 @@ public class Content {
         return tables;
     }   
     public void validate() throws ValidationException {
-        ValidationException.throwUnlessURL(template,"template");        
+        ValidationException.throwUnlessURL(formURL,"formUrl");        
         if (fields == null) return;
         for (TextField field: this.getFields()) {
             field.validate();
@@ -62,7 +62,8 @@ public class Content {
     }
     
     public static void setup(XStream xstream) {
-        xstream.alias("content", Content.class);        
-        xstream.useAttributeFor("template", String.class);       
+        xstream.alias("content", Content.class);       
+        xstream.aliasField("form-url", Content.class, "formURL");
+        // xstream.useAttributeFor("formURL", String.class);           
     }    
 }
