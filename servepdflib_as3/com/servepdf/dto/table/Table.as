@@ -30,15 +30,18 @@ package com.servepdf.dto.table
 				this.rows.push(new Row(columns));
 		}
 		/**
-		 * Return the first row with has a cell at a given column with a given contents
+		 * Return the last row that has a cell at a given column with a given contents
 		 */
 		public function findLastRowWithCell(column:int,contents:String):Row {
 			var found:Row = null
 			for(var r:int=0;r<rows.length;r++) {
 				var eachRow:Row = rows[r]
-				var first:Cell = eachRow.cells[column]
-				if (contents == first.contents) {
-					found = eachRow
+				// row may not have cells
+				if (eachRow.cells.length > column) {
+					var first:Cell = eachRow.cells[column]
+					if (contents == first.contents) {
+						found = eachRow
+					}
 				}
 			}
 			return found
