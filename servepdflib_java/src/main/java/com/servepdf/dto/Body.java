@@ -22,10 +22,6 @@ import com.thoughtworks.xstream.XStream;
 
 public class Body {
 	public List<Content> contentList = new ArrayList<Content>();
-
-	public Body(){
-	    this.contentList.add(new Content());
-	}
 	
     public List<Content> getContentList() {
         return contentList;
@@ -44,7 +40,13 @@ public class Body {
     	xstream.addImplicitCollection(Body.class, "contentList");	
     }
     public Content getContent(){
-        return contentList.get(0);
+    	if (contentList.size() == 0) {
+    		Content newContent = new Content();
+    		contentList.add(newContent);
+    		return newContent;
+    	} else {
+    		return contentList.get(0);
+    	}
     }
     
 }
