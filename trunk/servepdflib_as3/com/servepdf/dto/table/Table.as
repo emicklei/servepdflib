@@ -15,7 +15,7 @@
 */
 package com.servepdf.dto.table
 {
-	import com.servepdf.dto.PDFData;
+	import com.servepdf.dto.Content;
 	import com.servepdf.dto.TextField;
 	
 	public class Table
@@ -46,7 +46,7 @@ package com.servepdf.dto.table
 			}
 			return found
 		}
-		public function addAsTextFieldsTo(fieldNamePrefixes:Array,data:PDFData):void {
+		public function addAsTextFieldsTo(fieldNamePrefixes:Array,content:Content):void {
 			for(var r:int=0;r<rows.length;r++) {
 				var eachRow:Row = rows[r]
 				for(var c:int=0;c<eachRow.cells.length;c++) {
@@ -56,7 +56,7 @@ package com.servepdf.dto.table
 					name = name + String(r)
 					name = name + "]"
 					var field:TextField = new TextField(name,eachCell.contents)
-					data.body.fields.push(field)
+					content.fields.push(field)
 				}
 			}			
 		}
@@ -68,5 +68,6 @@ package com.servepdf.dto.table
 			}			
 			return table;
 		}
+		public function validate():void {}		
 	}
 }

@@ -16,28 +16,31 @@
 package com.servepdf.dto
 {
 	import com.servepdf.dto.table.Table;
-	
-	[Bindable]
+
 	public class Body
 	{
-		public var fields:Array = new Array();
-		public var tables:Array = new Array();	
+		public var contentList:Array = new Array();
+		
+		public function getContent():Content{
+			if (contentList.length == 0) {
+				contentList.push(new Content());
+			}
+			return contentList[0]
+		}
 		
 		public function toXML():XML {
 			var bodyNode:XML = <body/>
-			var fieldsNode:XML = <fields/>
-			for (var i:int;i<fields.length;i++) {
-				var eachField:TextField = TextField(fields[i])
-				fieldsNode.appendChild(<field name={eachField.name} value={eachField.value} />)
-			}
-			bodyNode.appendChild(fieldsNode)
-			var tablesNode:XML = <tables/>
-			for (var j:int;j<tables.length;j++) {
-				var eachTable:Table = Table(tables[j])
-				tablesNode.appendChild(eachTable.toXML())
-			}
-			bodyNode.appendChild(tablesNode)			
+			for (var i:int;i<contentList.length;i++) {
+				var eachContent:Content = Content(contentList[i])
+				bodyNode.appendChild(eachContent.toXML())
+			}		
 			return bodyNode
 		}	
+		public function validate():void {
+			for (var i:int;i<contentList.length;i++) {
+				var eachContent:Content = Content(contentList[i])
+				eachContent.validate()
+			}
+		}		
 	}
 }
