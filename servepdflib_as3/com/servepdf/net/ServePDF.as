@@ -43,8 +43,7 @@ package com.servepdf.net
        	    // therefore a custom header is used
        	    var authentication:URLRequestHeader = new URLRequestHeader("pws-authentication",this.computeSignature(data,secretAccessKey))
        	    request.requestHeaders.push(authentication)
-       	    request.contentType = "text/xml"   
-       	    var documentURL:String = data.head.documentURL
+       	    request.contentType = "text/xml"
        	    request.data = data.toXML().toXMLString()
        	    navigateToURL(request,targetWindow);
 		}
@@ -61,6 +60,7 @@ package com.servepdf.net
 			// check data
 			if (data == null)
 				throw new ArgumentError("data is null and should be PDFData")
+			data.validate()
 		}
 		
 		private function computeSignature(data:PDFData, secretAccessKey:String):String {

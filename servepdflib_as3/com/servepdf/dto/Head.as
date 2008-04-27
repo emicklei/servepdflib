@@ -17,7 +17,6 @@ package com.servepdf.dto
 {
 	public class Head
 	{		
-		public var documentURL:String;
 		public var accessKey:String;
 		public var applicationKey:String;
 		public var cacheControl:String = "no-cache";
@@ -29,8 +28,7 @@ package com.servepdf.dto
 		}
 		
 		public function toXML():XML {
-			var head:XML = <head>
-					<document-url>{documentURL}</document-url>
+			var head:XML = <head>					
 					<accessKey>{accessKey}</accessKey>
 					<applicationKey>{applicationKey}</applicationKey>
 					<cache-control>{cacheControl}</cache-control>
@@ -40,5 +38,9 @@ package com.servepdf.dto
 			}
 			return head
 		}	
+		public function validate():void {
+			if (accessKey == null || accessKey.length == 0)
+				throw new ArgumentError("Head has invalid accessKey")
+		}		
 	}
 }

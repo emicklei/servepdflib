@@ -1,18 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <flexLibProperties version="1">
-  <includeClasses>
-    <classEntry path="com.servepdf.dto.Body"/>
-    <classEntry path="com.servepdf.dto.Head"/>
-    <classEntry path="com.servepdf.dto.Mail"/>
-    <classEntry path="com.servepdf.dto.PDFData"/>
-    <classEntry path="com.servepdf.dto.TextField"/>
-    <classEntry path="com.servepdf.dto.table.Builder"/>
-    <classEntry path="com.servepdf.dto.table.Cell"/>
-    <classEntry path="com.servepdf.dto.table.HeaderCell"/>
-    <classEntry path="com.servepdf.dto.table.Row"/>
-    <classEntry path="com.servepdf.dto.table.Table"/>
-    <classEntry path="com.servepdf.net.ServePDF"/>
-  </includeClasses>
-  <includeResources/>
-  <namespaceManifests/>
+<includeClasses>
+<classEntry path="com.servepdf.dto.table.Builder"/>
+<classEntry path="com.servepdf.dto.Content"/>
+<classEntry path="com.servepdf.dto.table.Cell"/>
+<classEntry path="com.servepdf.dto.table.Table"/>
+<classEntry path="com.servepdf.dto.table.HeaderCell"/>
+<classEntry path="com.servepdf.dto.Head"/>
+<classEntry path="com.servepdf.dto.Mail"/>
+<classEntry path="com.servepdf.dto.TextField"/>
+<classEntry path="com.servepdf.dto.table.Row"/>
+<classEntry path="com.servepdf.dto.Body"/>
+<classEntry path="com.servepdf.dto.PDFData"/>
+<classEntry path="com.servepdf.net.ServePDF"/>
+</includeClasses>
+<includeResources/>
+<namespaceManifests/>
 </flexLibProperties>

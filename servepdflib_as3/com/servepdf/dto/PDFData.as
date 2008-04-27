@@ -17,20 +17,23 @@ package com.servepdf.dto
 {
 	import com.servepdf.net.ServePDF;
 	
-	[Bindable]
 	public class PDFData
 	{
 		public var head:Head = new Head();
 		public var body:Body = new Body();	
 		
-		public function setField(fieldName:String,fieldValue:String):void{
-			body.fields.push(new TextField(fieldName,fieldValue));
+		public function addText(fieldName:String,fieldValue:String):void{
+			body.getContent().addText(fieldName,fieldValue)
 		}				
 		public function toXML():XML {
 			var pdfdata:XML = <pdfdata/>
 			pdfdata.appendChild(head.toXML())
 			pdfdata.appendChild(body.toXML())
 			return pdfdata
+		}
+		public function validate():void {
+			head.validate()
+			body.validate()
 		}
 	}
 }

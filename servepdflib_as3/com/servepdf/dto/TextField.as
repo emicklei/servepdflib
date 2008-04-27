@@ -15,7 +15,6 @@
 */
 package com.servepdf.dto
 {
-	[Bindable]
 	public class TextField
 	{
 		public var name:String;
@@ -26,5 +25,11 @@ package com.servepdf.dto
 			this.name = newName
 			this.value = newValue
 		}
+		public function validate():void {
+			if (name == null || name.length == 0)
+				throw new ArgumentError("TextField has invalid name")
+			if (value == null)
+				throw new ArgumentError("TextField has invalid value")				
+		}		
 	}
 }
