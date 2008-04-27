@@ -4,8 +4,11 @@ package com.servepdf.test
 	
 	public class AllServePDFTests
 	{
-
 		public static function suite(): TestSuite
-			{ return null;}
+			{ 
+				var ts:TestSuite = new TestSuite()
+				ts.addTest(new PDFDataTest("testContent"))
+				return ts;
+			}
 	}
 }
