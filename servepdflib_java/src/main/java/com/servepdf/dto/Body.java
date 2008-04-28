@@ -21,9 +21,10 @@ import java.util.List;
 import com.thoughtworks.xstream.XStream;
 
 public class Body {
-	public List<Content> contentList = new ArrayList<Content>();
+	private List<Content> contentList;
 	
     public List<Content> getContentList() {
+    	if (contentList == null) this.contentList = new ArrayList<Content>();
         return contentList;
     }
 
@@ -32,7 +33,9 @@ public class Body {
     }
     
     public void validate() throws ValidationException {
-        for (Content each : contentList) {
+    	if (getContentList().isEmpty())
+    		throw new ValidationException("contentList","No content in body");
+        for (Content each : getContentList()) {
             each.validate();
         }
     }
@@ -40,7 +43,7 @@ public class Body {
     	xstream.addImplicitCollection(Body.class, "contentList");	
     }
     public Content getContent(){
-    	if (contentList.size() == 0) {
+    	if (getContentList().size() == 0) {
     		Content newContent = new Content();
     		contentList.add(newContent);
     		return newContent;
