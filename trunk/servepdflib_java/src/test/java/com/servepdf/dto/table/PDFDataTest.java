@@ -30,12 +30,12 @@ public class PDFDataTest extends TestCase {
 	    data.head.cacheControl = Head.CACHE_ASSETS;
 	    data.head.unserviceableURL = "unserviceableURL";
 		data.addText("test", "value");
-		Content content = data.body.contentList.get(0);
+		Content content = data.body.getContentList().get(0);
 		content.formURL = "http://here.there.com";
 		Table table = new Table();
 		table.columnWidths = "100,10";
 		table.setFontSize("12");
-        data.body.contentList.get(0).getTables().add(table);
+        data.body.getContentList().get(0).getTables().add(table);
 		PDFData atad = toXmlAndBack(data);
 		// test if everything was read
 		assertEquals(data.head.accessKey, atad.head.accessKey);
