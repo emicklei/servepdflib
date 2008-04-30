@@ -19,6 +19,8 @@ package com.servepdf.dto
 	{		
 		public var accessKey:String;
 		public var applicationKey:String;
+		public var documentName:String;
+		public var unserviceableURL:String;
 		public var cacheControl:String = "no-cache";
 		private var mail:Mail;	
 		
@@ -30,9 +32,17 @@ package com.servepdf.dto
 		public function toXML():XML {
 			var head:XML = <head>					
 					<accessKey>{accessKey}</accessKey>
-					<applicationKey>{applicationKey}</applicationKey>
 					<cache-control>{cacheControl}</cache-control>
 				</head>
+			if (documentName != null) {
+				head.appendChild(<document-name>{documentName}</document-name>)
+			}	
+			if (applicationKey != null) {
+				head.appendChild(<application-key>{applicationKey}</application-key>)					
+			}	
+			if (unserviceableURL != null) {
+				head.appendChild(<unserviceable-url>{unserviceableURL}</unserviceable-url>)					
+			}								
 			if (this.mail != null) {
 				head.appendChild(mail.toXML())
 			}
