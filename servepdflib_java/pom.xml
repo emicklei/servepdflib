@@ -5,7 +5,7 @@
 	<groupId>com.servepdf</groupId>
 	<artifactId>servepdflib</artifactId>
 	<packaging>jar</packaging>
-	<version>1.0-SNAPSHOT</version>
+	<version>1.0.1</version>
 	<name>servepdflib_java</name>
 	<url>http://www.servepdf.com</url>
 	<scm>
