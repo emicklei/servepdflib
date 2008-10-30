@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute" width="354" height="354" backgroundGradientAlphas="[1.0, 1.0]" backgroundGradientColors="[#F9F4F4, #E45E5E]">
+	<mx:Form x="10" y="10">
+		<mx:FormHeading label="Business Card" color="#D8250D" fontSize="16"/>
+		<mx:FormItem label="Name:">
+			<mx:TextInput id="nameTI"  fontFamily="Verdana" fontSize="13" fontWeight="bold" text="John T. Walsh"/>
+		</mx:FormItem>
+		<mx:FormItem label="Function:">
+			<mx:TextInput id="functionTI"  fontFamily="Verdana" fontSize="13" fontWeight="bold" text="Sand Artist"/>
+		</mx:FormItem>		
+		<mx:FormItem label="Address:">
+			<mx:TextInput id="addressTI"  fontFamily="Verdana" fontSize="13" fontWeight="bold" text="Lindenmayer 18"/>
+		</mx:FormItem>
+		<mx:FormItem label="Phone:">
+			<mx:TextInput id="phoneTI"  fontFamily="Verdana" fontSize="13" fontWeight="bold" text="+49 1234 5678"/>
+		</mx:FormItem>
+		<mx:FormItem label="Email:">
+			<mx:TextInput id="emailTI"  fontFamily="Verdana" fontSize="13" fontWeight="bold" text="info@servepdf.com"/>
+		</mx:FormItem>
+		<mx:FormItem label="Internet:">
+			<mx:TextInput id="internetTI"  fontFamily="Verdana" fontSize="13" fontWeight="bold" text="www.servepdf.com"/>
+		</mx:FormItem>
+		<mx:FormItem label="Company Slogan:">
+			<mx:TextInput id="sloganTI"  fontFamily="Verdana" fontSize="13" fontWeight="bold" text="Form+Data=PDF"/>
+		</mx:FormItem>
+		<mx:FormItem>
+			<mx:CheckBox id="targetWin" fontFamily="Verdana" fontSize="13" fontWeight="bold" selected="false" label="open in a new window"/>
+		</mx:FormItem>
+		<mx:FormItem>
+			<mx:Button label="Create PDF" click="doCreatePDF()"/>
+		</mx:FormItem>
+	</mx:Form>
+	
+	<mx:Script>
+		<![CDATA[
+			import com.servepdf.dto.Content;
+			import com.servepdf.net.ServePDF;
+			import com.servepdf.dto.PDFData;
+			
+			private function doCreatePDF():void {
+				var pdfData:PDFData = new PDFData()
+				pdfData.head.accessKey = "businesscard-access"
+				pdfData.head.documentName = "businesscard-demo-servepdf.com.pdf"
+				var content:Content = pdfData.body.getContent()
+				content.formURL = "http://docs.servepdf.com/forms/businesscard1.pdf"
+				
+				content.addText("TextField1",nameTI.text)
+				content.addText("email",emailTI.text)
+				content.addText("address",addressTI.text)
+				content.addText("function",functionTI.text)
+				content.addText("internet",internetTI.text)
+				content.addText("slogan",sloganTI.text)
+				content.addText("phone",phoneTI.text)
+						
+				var service:ServePDF = new ServePDF()
+				if (targetWin.selected)
+					service.targetWindow = "_blank"
+				else
+					service.targetWindow = "_self"
+				// service.base_url = "http://localhost:8080/servepdf"
+				service.process(pdfData,"businesscard-secret")						
+			}
+		]]>
+	</mx:Script>
+	
+</mx:Application>
