@@ -1,3 +1,6 @@
 #summary Basic example how to prepare data and process it with a PDF template document.
 
-See [http://servepdf.com/site/businesscard]
+To run the example goto [http://servepdf.com/site/businesscard].
+
+To view the Flex source that uses the library, 
+see [http://code.google.com/p/servepdflib/source/browse/trunk/servepdf-flexdemos/src/businesscard.mxml].
