@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:WindowedApplication xmlns:mx="http://www.adobe.com/2006/mxml" layout="absolute"
 	creationComplete="onCreationComplete()"
-	xmlns:flexunit="flexunit.flexui.*">
+	xmlns:flexunit="flexunit.flexui.*" width="976" height="584">
 	<mx:Script>
 		<![CDATA[
 			import com.servepdf.test.AllServePDFTests;
